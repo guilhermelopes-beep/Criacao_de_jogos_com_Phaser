@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+
 // Serve arquivos estáticos da pasta 'public' e 'src'
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'src')));

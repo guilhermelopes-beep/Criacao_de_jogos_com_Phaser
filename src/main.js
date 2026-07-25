@@ -29,4 +29,6 @@ const config = {
     ]
 };
 
-new Phaser.Game(config);
+const game = new Phaser.Game(config);
+
+console.log('Jogo inicializado!', game);
