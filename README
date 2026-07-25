@@ -1,0 +1,9 @@
+Bom dia, boa tarde e boa noite.
+
+Para iniciar o projeto abra um terminal no Docker e execute o comando:
+
+```
+docker-compose up --build
+```
+
+Esse comando fará com que o Docker siga as instruções definidas nos arquivos docker-compose.yml, a propósito, se você estiver no VSCode você também pode executar o projeto pelo arquivo yml.

@@ -2,47 +2,380 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Racer?</title>
-    <style>
-            /* Reset CSS: Please avoid making changes here unless you know what you're doing :) */
-            *,
-            *::before,
-            *::after {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-    
-            html, body {
-                width: 100%;
-                height: 100%;
-            }
-    
-            body {
-                line-height: 1;
-                font-family: Arial, sans-serif;
-                background-color: #040218;
-            }
-    
-            ol, ul {
-                list-style: none;
-            }
-    
-            img, video {
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-    
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
-    </style>
-    <script src="//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuiPython - Lista de Jogos</title>
+    <link rel="stylesheet" href="index.css">
 </head>
-<body style="background-color: black;">
-    <script src="main.js" type="module"></script>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h3>Gui Games 🎮 🕹️ ♠️</h3>
+        </div>
+        <nav class="nav">
+            <button class="button"><a href="#" class="active">Jogos</a></button>
+            <button class="button"><a href="#">Categorias</a></button>
+            <button class="button"><a href="#">Favoritos</a></button>
+            <button id="ultrawideButton" class="ultrawide-button" title="Ativar visualização ultrawide">
+                ↔ <span>Ultrawide</span>
+            </button>
+        </nav>
+        <button class="menu-button">
+            ☰
+        </button>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-label">EXPLORE O UNIVERSO GAMER</span>
+                <h1>
+                    Encontre seu próximo
+                    <span>jogo favorito</span>
+                </h1>   
+                <p>
+                    Descubra novos mundos, aventuras e desafios.
+                    Escolha um jogo e confira todos os detalhes.
+                </p>
+            </div>
+        </section>
+        <!-- Barra de pesquisa -->
+        <section class="filters">
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" id="searchInput" placeholder="Pesquisar jogos...">
+            </div>
+
+            <select id="categoryFilter">
+                <option value="all">Todas as categorias</option>
+                <option value="RPG">RPG</option>
+                <option value="Ação">Ação</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Estratégia">Estratégia</option>
+            </select>
+
+        </section>
+
+
+        <!-- Lista de jogos -->
+        <section class="games-section">
+
+            <div class="section-title">
+                <div>
+                    <span>COLEÇÃO</span>
+                    <h2>Jogos em destaque</h2>
+                </div>
+
+                <p id="gameCount">6 jogos encontrados</p>
+            </div>
+
+
+            <div class="games-grid" id="gamesGrid">
+
+                <!-- Jogo 1 -->
+                <a href="jogo_demo.html" class="game-card" data-category="Ação">
+
+                    <div class="game-image">
+                        <img
+                            src="./img/jogo_demo.png"
+                            alt="Demo tutorial"
+                        >
+
+                        <span class="game-category">Ação</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Demo Tutorial</h3>
+
+                        <p>
+                            Explore um vasto mundo repleto de perigos,
+                            mistérios e batalhas épicas.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 10</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </a>
+
+
+                <!-- Jogo 2 -->
+                <a href="#" class="game-card" data-category="Ação">
+
+                    <div class="game-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
+                            alt="Cyberpunk 2077"
+                        >
+
+                        <span class="game-category">Ação</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Cyberpunk 2077</h3>
+
+                        <p>
+                            Viva uma aventura futurista em uma cidade
+                            dominada pela tecnologia.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 8.8</span>
+                            <span>2020</span>
+                        </div>
+                    </div>
+
+                </a>
+
+
+                <!-- Jogo 3 -->
+                <a href="#" class="game-card" data-category="Aventura">
+
+                    <div class="game-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=80"
+                            alt="The Witcher 3"
+                        >
+
+                        <span class="game-category">Aventura</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>The Witcher 3</h3>
+
+                        <p>
+                            Embarque em uma jornada fantástica cheia
+                            de monstros e escolhas.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 9.8</span>
+                            <span>2015</span>
+                        </div>
+                    </div>
+
+                </a>
+
+
+                <!-- Jogo 4 -->
+                <a href="#" class="game-card" data-category="Estratégia">
+
+                    <div class="game-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?auto=format&fit=crop&w=800&q=80"
+                            alt="Civilization VI"
+                        >
+
+                        <span class="game-category">Estratégia</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Civilization VI</h3>
+
+                        <p>
+                            Construa seu império e lidere sua civilização
+                            através da história.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 9.0</span>
+                            <span>2016</span>
+                        </div>
+                    </div>
+
+                </a>
+
+
+                <!-- Jogo 5 -->
+                <a href="#" class="game-card" data-category="Ação">
+
+                    <div class="game-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80"
+                            alt="God of War"
+                        >
+
+                        <span class="game-category">Ação</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>God of War</h3>
+
+                        <p>
+                            Enfrente deuses e criaturas mitológicas
+                            em uma jornada inesquecível.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 9.6</span>
+                            <span>2018</span>
+                        </div>
+                    </div>
+
+                </a>
+
+
+                <!-- Jogo 6 -->
+                <a href="#" class="game-card" data-category="RPG">
+
+                    <div class="game-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=800&q=80"
+                            alt="Final Fantasy"
+                        >
+
+                        <span class="game-category">RPG</span>
+
+                        <button class="favorite" onclick="event.preventDefault()">
+                            ♡
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Final Fantasy</h3>
+
+                        <p>
+                            Descubra uma história épica em um universo
+                            fantástico cheio de aventuras.
+                        </p>
+
+                        <div class="game-footer">
+                            <span>⭐ 9.2</span>
+                            <span>2023</span>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+
+            <div class="no-results" id="noResults">
+                <span>🎮</span>
+                <h3>Nenhum jogo encontrado</h3>
+                <p>Tente pesquisar por outro nome ou categoria.</p>
+            </div>
+
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p>© 2026 Guipython. Todos os direitos reservados.</p>
+        <p>Página feita pelo ChatGPT.</p>
+    </footer>
+    <script>
+
+        const ultrawideButton = document.getElementById("ultrawideButton");
+
+        ultrawideButton.addEventListener("click",
+            function () {
+                // Ativa/desativa o modo ultrawide
+                document.body.classList.toggle("ultrawide");
+                // Atualiza visual do botão
+                ultrawideButton.classList.toggle("active");
+            });
+    </script>
+    <script>
+
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+
+        const gameCards = document.querySelectorAll(".game-card");
+        const gameCount = document.getElementById("gameCount");
+        const noResults = document.getElementById("noResults");
+
+
+        function filterGames() {
+
+            const searchText =
+                searchInput.value.toLowerCase();
+
+            const category =
+                categoryFilter.value;
+
+            let visibleGames = 0;
+
+
+            gameCards.forEach(card => {
+
+                const title =
+                    card.querySelector("h3")
+                        .textContent
+                        .toLowerCase();
+
+                const cardCategory =
+                    card.dataset.category;
+
+
+                const matchesSearch =
+                    title.includes(searchText);
+
+                const matchesCategory =
+                    category === "all" ||
+                    cardCategory === category;
+
+
+                if (matchesSearch && matchesCategory) {
+
+                    card.style.display = "block";
+
+                    visibleGames++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            gameCount.textContent =
+                `${visibleGames} jogos encontrados`;
+
+
+            if (visibleGames === 0) {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            filterGames
+        );
+
+
+        categoryFilter.addEventListener(
+            "change",
+            filterGames
+        );
+
+    </script>
 </body>
 </html>
