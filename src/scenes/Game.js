@@ -1,3 +1,4 @@
+import { Enemy } from '../gameObjects/Enemy.js';
 import { Player } from '../gameObjects/Player.js';
 
 export class Game extends Phaser.Scene {
@@ -7,17 +8,36 @@ export class Game extends Phaser.Scene {
     
     create() {
         
-        this.add.image(400, 300, 'sky');
+        let contador = -1;
+
+        while (contador < 4){
+            
+            this.add.image(400*contador, 300, 'sky');
+
+            contador+=1;
+        }
+        
+
        
         this.platforms = this.physics.add.staticGroup();
     
 
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-        this.platforms.create(600, 400, 'ground');
-        this.platforms.create(50, 250, 'ground');
-        this.platforms.create(750, 220, 'ground');
+        let contadorW = -1;
 
+        while (contadorW < 4){
+            
+            let aleatorio = Math.random()*2
+                        
+            let x = 1000*aleatorio
+            let y = 800*aleatorio
+
+            this.platforms.create(x, y, 'ground');
+
+            contadorW+=1;
+        }
+        
         this.player = new Player(this, 100, 450);
 
         this.physics.add.collider(this.player, this.platforms);
@@ -27,6 +47,18 @@ export class Game extends Phaser.Scene {
             repeat: 11,
             setXY: { x: 12, y: 0, stepX: 70}
         });
+
+        /*
+        let contadorI = 0;
+        while (contadorI < 3){
+            this.inimigo = new Enemy(this, 300*contadorI, 0);
+            contadorI += 1;
+        }*/
+
+        this.inimigo = new Enemy(this, 600, 0);
+        
+        this.physics.add.collider(this.inimigo, this.platforms);
+        this.physics.add.collider(this.inimigo, this.player);
 
 
         this.physics.add.collider(this.stars, this.platforms);
@@ -57,21 +89,48 @@ export class Game extends Phaser.Scene {
         this.teclaW = this.input.keyboard.addKey('W');
         this.teclaS = this.input.keyboard.addKey('S');
         this.teclaD = this.input.keyboard.addKey('D');
-
+        this.teclaX = this.input.keyboard.addKey('X');
+        this.teclaZ = this.input.keyboard.addKey('Z');
         
+
+        // inside your scene's create() method
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+
+        // optional: set bounds so the camera doesn't show outside the world
+        this.cameras.main.setBounds(0, 0, 1200, 800);
     }
 
     update() {
         
+        if(this.player.x < this.inimigo.x){
+            this.inimigo.moveLeft();
+        } 
+        else if (this.player.x > this.inimigo.x){
+            this.inimigo.moveRight();
+        }
+        else{
+            this.inimigo.idle();
+        }
+
+        if((this.player.y - this.inimigo.y)>1){
+            this.inimigo.jump();
+        } 
+        else if (this.player.x > this.inimigo.x){
+            //this.inimigo.crouch();
+        }
+
+
+
+        var attack_direction = '';
         
         if (this.cursors.left.isDown || this.teclaA.isDown){
             this.player.moveLeft();
-            this.attack('L');
+            attack_direction = 'L';
         }
 
         else if (this.cursors.right.isDown || this.teclaD.isDown){
             this.player.moveRight();
-            this.attack('R');
+            attack_direction = 'R';
         }
 
         else{
@@ -79,14 +138,20 @@ export class Game extends Phaser.Scene {
         }
 
 
-        if (this.cursors.space.isDown || this.cursors.up.isDown || this.teclaW.isDown){
+        if (this.cursors.space.isDown || this.teclaZ.isDown){
             this.player.jump();
-            this.attack('T');
+            attack_direction = 'T';
         }
         else if(this.cursors.down.isDown  || this.teclaS.isDown){
             this.player.crouch();
-            this.attack('D');
+            attack_direction = 'D';
         }
+        
+        if (this.teclaX.isDown){
+            this.attack(attack_direction);
+        }
+        
+
     }
 
     collectStar (player, star){
@@ -95,7 +160,21 @@ export class Game extends Phaser.Scene {
         this.score += 1;
         this.scoreText.setText('Pontuação: '+ this.score);
 
+        if (this.score >= 10){
+            this.physics.pause();
+            player.setTint(0xffff00);
+
+            player.anims.play('turn');
+
+            this.time.delayedCall(2000, () => {
+                this.scene.start('GameOver');
+            });
+        }
+
+
         this.releaseBomb();
+
+        
 
     }
 
@@ -137,9 +216,13 @@ export class Game extends Phaser.Scene {
     attack(direction){
         var arrow = this.arrows.create(this.player.x, this.player.y, 'arrow');
         arrow.body.allowGravity = false;
+        
+
         switch (direction){
             case 'L':
                 arrow.setVelocity(-300, 0);                
+                arrow.setScale(-1, 1);
+                
                 break;
             case 'R':
                 arrow.setVelocity(300, 0);                
@@ -148,6 +231,9 @@ export class Game extends Phaser.Scene {
                 arrow.setVelocity(0, -500);
                 break;
             case 'D':
+                arrow.setVelocity(0, 500);
+                break;
+            default:
                 arrow.setVelocity(0, 500);
                 break;
         }

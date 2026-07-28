@@ -31,6 +31,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('bomb', 'bomb.png');
         this.load.spritesheet('dude', 'dude.png', {frameWidth: 32, frameHeight: 48});
         this.load.image('arrow', 'extra/TinyRPG2/Arrow(Projectile)/Arrow01(100x100).png');
+        this.load.spritesheet('carangueijo', 'extra/TinyRPG/Characters/top-down-dungeon-enemy-robot/Spritesheets/robot-walk-side.png', {frameWidth: 20, frameHeight: 16})
 
     }
 
