@@ -52,5 +52,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
         this.setVelocityY(-500);
         }
     }
+    crouch(){
+        if (this.body.blocked.down){
+        this.setVelocityY(500);
+        }
+    }
+
 
 }
