@@ -9,6 +9,11 @@ const config = {
     height: 800,
     parent: 'game-container',
     backgroundColor: '#028af8',
+    fps: {
+            max: 60,
+            min: 20,
+            target: 60
+    },
     
     physics: {
         default: 'arcade',
