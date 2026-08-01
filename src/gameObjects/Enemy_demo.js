@@ -1,4 +1,4 @@
-export class Enemy extends Phaser.Physics.Arcade.Sprite{
+export class Enemy_demo extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y){
         super(scene, x, y, 'carangueijo');
         

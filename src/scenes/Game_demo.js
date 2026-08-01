@@ -1,10 +1,8 @@
-import { Enemy } from '../gameObjects/Enemy.js';
-import { Player } from '../gameObjects/Player.js';
+import { Enemy_demo } from '../gameObjects/Enemy_demo.js';
+import { Player_demo } from '../gameObjects/Player_demo.js';
 
-export class Game extends Phaser.Scene {
-    constructor() {
-        super('Game');
-    }
+export class Game_demo extends Phaser.Scene {
+    constructor() {super('Game_demo');}
     
     create() {
         this.create_backgroud();
@@ -17,57 +15,8 @@ export class Game extends Phaser.Scene {
     }
 
     update() {
-        
-        if(this.player.x < this.inimigo.x){
-            this.inimigo.moveLeft();
-        } 
-        else if (this.player.x > this.inimigo.x){
-            this.inimigo.moveRight();
-        }
-        else{
-            this.inimigo.idle();
-        }
-
-        if((this.player.y - this.inimigo.y)>1){
-            this.inimigo.jump();
-        } 
-        else if (this.player.x > this.inimigo.x){
-            //this.inimigo.crouch();
-        }
-
-
-
-        var attack_direction = '';
-        
-        if (this.cursors.left.isDown || this.teclaA.isDown){
-            this.player.moveLeft();
-            attack_direction = 'L';
-        }
-
-        else if (this.cursors.right.isDown || this.teclaD.isDown){
-            this.player.moveRight();
-            attack_direction = 'R';
-        }
-
-        else{
-            this.player.idle();
-        }
-
-
-        if (this.cursors.space.isDown || this.teclaZ.isDown){
-            this.player.jump();
-            attack_direction = 'T';
-        }
-        else if(this.cursors.down.isDown  || this.teclaS.isDown){
-            this.player.crouch();
-            attack_direction = 'D';
-        }
-        
-        if (this.teclaX.isDown){
-            this.attack(attack_direction);
-        }
-        
-
+        this.update_enemy_move();
+        this.update_move();
     }
 
     collectStar (player, star){
@@ -189,7 +138,7 @@ export class Game extends Phaser.Scene {
 
     create_objects(){
         //JOGADOR
-        this.player = new Player(this, 100, 450);
+        this.player = new Player_demo(this, 100, 450);
 
         this.stars = this.physics.add.group({
             key: 'star',
@@ -197,7 +146,7 @@ export class Game extends Phaser.Scene {
             setXY: { x: 12, y: 0, stepX: 70}
         });
 
-        this.inimigo = new Enemy(this, 600, 0);
+        this.inimigo = new Enemy_demo(this, 600, 0);
 
         this.bombs = this.physics.add.group();
 
@@ -253,4 +202,56 @@ export class Game extends Phaser.Scene {
         // optional: set bounds so the camera doesn't show outside the world
         this.cameras.main.setBounds(0, 0, 1200, 800);
     }
+
+    update_enemy_move(){
+        if(this.player.x < this.inimigo.x){
+            this.inimigo.moveLeft();
+        } 
+        else if (this.player.x > this.inimigo.x){
+            this.inimigo.moveRight();
+        }
+        else{
+            this.inimigo.idle();
+        }
+
+        if((this.player.y - this.inimigo.y)>1){
+            this.inimigo.jump();
+        } 
+        else if (this.player.x > this.inimigo.x){
+            //this.inimigo.crouch();
+        }
+    }
+    
+    update_move(){
+        var attack_direction = '';
+        
+        if (this.cursors.left.isDown || this.teclaA.isDown){
+            this.player.moveLeft();
+            attack_direction = 'L';
+        }
+
+        else if (this.cursors.right.isDown || this.teclaD.isDown){
+            this.player.moveRight();
+            attack_direction = 'R';
+        }
+
+        else{
+            this.player.idle();
+        }
+
+
+        if (this.cursors.space.isDown || this.teclaZ.isDown){
+            this.player.jump();
+            attack_direction = 'T';
+        }
+        else if(this.cursors.down.isDown  || this.teclaS.isDown){
+            this.player.crouch();
+            attack_direction = 'D';
+        }
+        
+        if (this.teclaX.isDown){
+            this.attack(attack_direction);
+        }
+    }
+
 }
