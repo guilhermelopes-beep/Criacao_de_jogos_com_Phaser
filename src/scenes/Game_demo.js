@@ -1,5 +1,5 @@
-import { Enemy_demo } from '../gameObjects/Enemy_demo.js';
-import { Player_demo } from '../gameObjects/Player_demo.js';
+import { Enemy_demo } from '../gameObjects/demo/Enemy_demo.js';
+import { Player_demo } from '../gameObjects/demo/Player_demo.js';
 
 export class Game_demo extends Phaser.Scene {
     constructor() {super('Game_demo');}
@@ -79,6 +79,7 @@ export class Game_demo extends Phaser.Scene {
     }
 
     attack(direction){
+        
         var arrow = this.arrows.create(this.player.x, this.player.y, 'arrow').setSize(10, 10);
         arrow.body.allowGravity = false;
         
@@ -103,6 +104,7 @@ export class Game_demo extends Phaser.Scene {
                 arrow.setVelocity(0, 500);
                 break;
         }
+        
     }    
 
     create_backgroud(){
@@ -181,9 +183,9 @@ export class Game_demo extends Phaser.Scene {
 
     create_hud(){
         this.score = 0;
-        this.scoreText = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(16, 16, 'Pontuação: 0', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
         this.life = 10;
-        this.lifeText = this.add.text(16, 48, 'Vida: 10', { fontSize: '32px', fill: '#000' });
+        this.lifeText = this.add.text(16, 48, 'Vida: 10', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
     }
 
     create_controls(){
@@ -200,7 +202,7 @@ export class Game_demo extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
 
         // optional: set bounds so the camera doesn't show outside the world
-        this.cameras.main.setBounds(0, 0, 1200, 800);
+        this.cameras.main.setBounds(0, 0, 800, 600);
     }
 
     update_enemy_move(){
@@ -214,7 +216,7 @@ export class Game_demo extends Phaser.Scene {
             this.inimigo.idle();
         }
 
-        if((this.player.y - this.inimigo.y)>1){
+        if((this.player.y - this.inimigo.y)<10){
             this.inimigo.jump();
         } 
         else if (this.player.x > this.inimigo.x){

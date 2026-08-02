@@ -44,12 +44,13 @@ export class Preloader extends Phaser.Scene {
 
     preload_demo(){
         //  Load the assets for the game - Replace with your own assets
-        this.load.setPath('assets');
+        this.load.setPath('assets/demo');
         this.load.image('sky', 'sky.png');
         this.load.image('ground', 'platform.png');
         this.load.image('star', 'star.png');
         this.load.image('bomb', 'bomb.png');
         this.load.spritesheet('dude', 'dude.png', {frameWidth: 32, frameHeight: 48});
+        this.load.setPath('assets');
         this.load.image('arrow', 'extra/TinyRPG2/Arrow(Projectile)/Arrow01(100x100).png');
         this.load.spritesheet('carangueijo', 'extra/TinyRPG/Characters/top-down-dungeon-enemy-robot/Spritesheets/robot-walk-side.png', {frameWidth: 20, frameHeight: 16})
 
