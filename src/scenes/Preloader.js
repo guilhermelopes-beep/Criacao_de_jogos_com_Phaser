@@ -6,6 +6,10 @@ export class Preloader extends Phaser.Scene {
             case 'demo':
                 this.init_demo();
                 break;
+
+            case 'DEC':
+                this.init_demo();
+                break;
             default:
                 this.init_demo();
                 break;
@@ -13,14 +17,50 @@ export class Preloader extends Phaser.Scene {
     }
 
     preload() {
-        this.preload_demo();
+        switch (jogo){
+            case 'demo':
+                this.preload_demo();
+                break;
+
+            case 'DEC':
+                this.preload_DEC();
+                break;
+            default:
+                this.preload_demo();
+                break;
+        }
+        
     }
 
     create() {
         //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
         //  For example, you can define global animations here, so we can use them in other scenes.
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('Game_demo');
+        switch (jogo){
+            case 'demo':
+                this.scene.start('Game_demo')
+                break;
+
+            case 'DEC':
+                this.scene.start('Game_DEC')
+                break;
+            default:
+                this.scene.start('Game_demo')
+                break;
+        }
+    }
+
+    preload_DEC(){
+        this.load.setPath('assets/DEC/Monster Pack Files/spritesheets');
+        this.load.spritesheet('centauro', 'centauro.png', {frameWidth: 112, frameHeight: 144});
+        this.load.spritesheet('demonio', 'demonio.png', {frameWidth: 112, frameHeight: 153});
+        this.load.spritesheet('amaldicoado', 'amaldicoado.png', {frameWidth: 112, frameHeight: 128});
+        this.load.spritesheet('demonio-p', 'demonio-pulador.png', {frameWidth: 101, frameHeight: 98});
+        this.load.spritesheet('bruxa', 'bruxa.png', {frameWidth: 55, frameHeight: 93});
+        this.load.spritesheet('hera-selvagem', 'hera-selvagem.png', {frameWidth: 80, frameHeight: 84});
+        this.load.spritesheet('vampiro', 'vampiro.png', {frameWidth: 121, frameHeight: 110});
+        this.load.setPath('assets/demo');
+        this.load.image('sky', 'sky.png');
     }
 
     init_demo(){

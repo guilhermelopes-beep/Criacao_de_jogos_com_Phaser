@@ -3,6 +3,7 @@ import { GameOver } from './scenes/GameOver.js';
 import { Preloader } from './scenes/Preloader.js';
 //JOGOS
 import { Game_demo } from './scenes/Game_demo.js';
+import { Game_DEC } from './scenes/Game_DEC.js';
 
 function demo(){
     const config = {
@@ -41,7 +42,7 @@ function demo(){
 return config;
 }
 
-function jogo1(){
+function DEC(){
     const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -53,16 +54,6 @@ function jogo1(){
             min: 20,
             target: 60
     },
-    
-    physics: {
-        default: 'arcade',
-        arcade: {
-            debug: false,
-            gravity: { 
-                y: 500 
-            }
-        }
-    },
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -70,7 +61,7 @@ function jogo1(){
     scene: [
         Boot,
         Preloader,
-        Game_demo,
+        Game_DEC,
         GameOver
     ]
 };
@@ -83,8 +74,8 @@ switch (jogo){
         var config = demo();
         break;
 
-    case 'jogo':
-        
+    case 'DEC':
+        var config = DEC();
 
         break;
     default:

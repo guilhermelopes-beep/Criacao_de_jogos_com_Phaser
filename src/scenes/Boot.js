@@ -6,8 +6,8 @@ export class Boot extends Phaser.Scene{
             case 'demo':
                 this.preload_demo();
                 break;
-            case 'jogo1':
-
+            case 'DEC':
+                
                 break;
             default:
                 this.preload_demo();
