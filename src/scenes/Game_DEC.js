@@ -1,6 +1,7 @@
 import { Monstro_DEC } from '../gameObjects/DEC/Monstro_DEC.js';
 import { Jogador_DEC } from '../gameObjects/DEC/Jogador_DEC.js';
 
+
 export class Game_DEC extends Phaser.Scene {
     constructor() {super('Game_DEC');}
     
@@ -12,7 +13,7 @@ export class Game_DEC extends Phaser.Scene {
     }
 
     update() {
-        
+        this.update_move();
     }
 
     create_backgroud(){
@@ -28,8 +29,13 @@ export class Game_DEC extends Phaser.Scene {
     }
 
     create_objects(){
-        this.jogador = new Jogador_DEC(this, 100, 450);
-        this.inimigo = new Monstro_DEC(this, 600, 0);
+        
+        this.jogador = new Jogador_DEC(this, 100, 450, 'vampiro');
+        this.jogador2 = new Jogador_DEC(this, 200, 450, 'centauro');
+        let monstro = Math.random();
+        
+        
+        this.inimigo = new Monstro_DEC(this, 600, 200,'bruxa');
     }
 
     create_hud(){
@@ -45,22 +51,9 @@ export class Game_DEC extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 800, 600);
     }
     
-    update_move(){
-        
+    update_move(){        
         this.jogador.idle();
-        
-
-        if (this.cursors.left.isDown || this.teclaA.isDown){
-            
-        }
-
-        else if (this.cursors.right.isDown || this.teclaD.isDown){
-            
-        }
-
-        else{
-            
-        }
+        this.jogador2.idle();
     }
 
 }
