@@ -45,6 +45,7 @@ export class Enemy_demo extends Phaser.Physics.Arcade.Sprite{
 
     idle(){
         this.anims.play('idle', true);
+        this.setVelocityX(0);
     }
 
     jump(){

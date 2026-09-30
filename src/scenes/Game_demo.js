@@ -1,6 +1,7 @@
 import { Enemy_demo } from '../gameObjects/demo/Enemy_demo.js';
 import { Player_demo } from '../gameObjects/demo/Player_demo.js';
 
+
 export class Game_demo extends Phaser.Scene {
     constructor() {super('Game_demo');}
     
@@ -176,9 +177,6 @@ export class Game_demo extends Phaser.Scene {
         this.physics.add.collider(this.arrows, this.platforms, this.arrowHitGround, null, this);
         this.physics.add.collider(this.arrows, this.bombs, this.hitBombWArrow, null, this);
         this.physics.add.collider(this.arrows, this.stars, this.hitBombWArrow, null, this);
-        
-
-
     }
 
     create_hud(){
@@ -186,6 +184,7 @@ export class Game_demo extends Phaser.Scene {
         this.scoreText = this.add.text(16, 16, 'Pontuação: 0', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
         this.life = 10;
         this.lifeText = this.add.text(16, 48, 'Vida: 10', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
+               
     }
 
     create_controls(){
@@ -206,17 +205,18 @@ export class Game_demo extends Phaser.Scene {
     }
 
     update_enemy_move(){
-        if(this.player.x < this.inimigo.x){
+        let dentro_do_range = (this.player.y - this.inimigo.y)<-200 || (this.player.y - this.inimigo.y)>200 || (this.player.x - this.inimigo.x)<-200 || (this.player.x - this.inimigo.x)>200;
+
+        if (dentro_do_range){
+            this.inimigo.idle();            
+        }               
+        else if(this.player.x < this.inimigo.x){
             this.inimigo.moveLeft();
         } 
-        else if (this.player.x > this.inimigo.x){
+        else{
             this.inimigo.moveRight();
         }
-        else{
-            this.inimigo.idle();
-        }
-
-        if((this.player.y - this.inimigo.y)<10){
+        if((this.player.y - this.inimigo.y)<-20 && dentro_do_range){
             this.inimigo.jump();
         } 
         else if (this.player.x > this.inimigo.x){
@@ -255,5 +255,4 @@ export class Game_demo extends Phaser.Scene {
             this.attack(attack_direction);
         }
     }
-
 }
