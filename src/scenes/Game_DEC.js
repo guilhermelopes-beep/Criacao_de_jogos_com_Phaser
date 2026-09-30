@@ -32,10 +32,10 @@ export class Game_DEC extends Phaser.Scene {
         
         this.jogador = new Jogador_DEC(this, 100, 450, 'vampiro');
         this.jogador2 = new Jogador_DEC(this, 200, 450, 'centauro');
-        let monstro = Math.random();
+        let inimigo_pos = Math.random();
         
         
-        this.inimigo = new Monstro_DEC(this, 600, 200,'bruxa');
+        this.inimigo = new Monstro_DEC(this, (inimigo_pos+0.3)*600, (inimigo_pos+0.4)*200,'bruxa');
     }
 
     create_hud(){
@@ -54,6 +54,7 @@ export class Game_DEC extends Phaser.Scene {
     update_move(){        
         this.jogador.idle();
         this.jogador2.idle();
+        this.inimigo.idle();
     }
 
 }
