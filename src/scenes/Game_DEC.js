@@ -10,14 +10,14 @@ export class Game_DEC extends Phaser.Scene {
         this.create_objects();
         this.create_hud();
         this.create_camera();
+        this.create_controls();
     }
 
     update() {
         this.update_move();
     }
 
-    create_backgroud(){
-            
+    create_backgroud(){      
         let contador = -1;
 
         while (contador < 4){
@@ -38,6 +38,16 @@ export class Game_DEC extends Phaser.Scene {
         this.inimigo = new Monstro_DEC(this, (inimigo_pos+0.3)*600, (inimigo_pos+0.4)*200,'bruxa');
     }
 
+    create_controls(){
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.teclaA = this.input.keyboard.addKey('A');
+        this.teclaW = this.input.keyboard.addKey('W');
+        this.teclaS = this.input.keyboard.addKey('S');
+        this.teclaD = this.input.keyboard.addKey('D');
+        this.teclaX = this.input.keyboard.addKey('X');
+        this.teclaZ = this.input.keyboard.addKey('Z');        
+    }
+
     create_hud(){
         this.life = 10;
         this.lifeText = this.add.text(16, 16, 'Vida: 10', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
@@ -52,9 +62,39 @@ export class Game_DEC extends Phaser.Scene {
     }
     
     update_move(){        
-        this.jogador.idle();
+        
         this.jogador2.idle();
         this.inimigo.idle();
-    }
 
+        var attack_direction = '';
+        
+        if (this.cursors.left.isDown || this.teclaA.isDown){
+            this.jogador.moveLeft();
+            attack_direction = 'L';
+        }
+
+        else if (this.cursors.right.isDown || this.teclaD.isDown){
+            this.player.moveRight();
+            attack_direction = 'R';
+        }
+
+        else{
+            this.jogador.idle();
+        }
+
+
+        if (this.cursors.space.isDown || this.teclaZ.isDown){
+            this.jogador.jump();
+            attack_direction = 'T';
+        }
+        else if(this.cursors.down.isDown  || this.teclaS.isDown){
+            this.jogador.crouch();
+            attack_direction = 'D';
+        }
+        
+        if (this.teclaX.isDown){
+            this.attack(attack_direction);
+        }
+    }
+    
 }

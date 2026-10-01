@@ -23,7 +23,6 @@ export class Boot extends Phaser.Scene{
         //  The smaller the file size of the assets, the better, as the Boot Scene itself has no preloader.
         this.load.setPath('assets/demo');
         this.load.image('background', 'bg.png');
-        this.load.image('phaser', 'phaser.png')
-        
+        this.load.image('phaser', 'phaser.png')   
     }
 }

@@ -61,6 +61,8 @@ export class Preloader extends Phaser.Scene {
         this.load.spritesheet('vampiro', 'vampiro.png', {frameWidth: 121, frameHeight: 110});
         this.load.setPath('assets/demo');
         this.load.image('sky', 'sky.png');
+        this.load.setPath('assets/DEC/EnemyProjectile');
+        this.load.spritesheet('bola de fogo', 'spritesheet.png', {frameWidth: 16, frameHeight: 16});
     }
 
     init_demo(){
