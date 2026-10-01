@@ -30,7 +30,7 @@ export class Game_DEC extends Phaser.Scene {
 
     create_objects(){
         
-        this.jogador = new Jogador_DEC(this, 100, 450, 'vampiro');
+        this.jogador = new Jogador_DEC(this, 100, 450, 'bruxa');
         this.jogador2 = new Jogador_DEC(this, 200, 450, 'centauro');
         let inimigo_pos = Math.random();
         
@@ -50,7 +50,7 @@ export class Game_DEC extends Phaser.Scene {
 
     create_hud(){
         this.life = 10;
-        this.lifeText = this.add.text(16, 16, 'Vida: 10', {fontFamily:'Georgia' , fontSize: '32px', fill: '#000' });
+        this.lifeText = this.add.text(16, 16, 'Vida: 10', {fontFamily:'Clarity' , fontSize: '32px', fill: '#000' });
     }
 
     create_camera(){
@@ -62,19 +62,17 @@ export class Game_DEC extends Phaser.Scene {
     }
     
     update_move(){        
-        
-        this.jogador2.idle();
         this.inimigo.idle();
 
         var attack_direction = '';
         
-        if (this.cursors.left.isDown || this.teclaA.isDown){
+        if (this.teclaA.isDown){
             this.jogador.moveLeft();
             attack_direction = 'L';
         }
 
-        else if (this.cursors.right.isDown || this.teclaD.isDown){
-            this.player.moveRight();
+        else if (this.teclaD.isDown){
+            this.jogador.moveRight();
             attack_direction = 'R';
         }
 
@@ -82,19 +80,41 @@ export class Game_DEC extends Phaser.Scene {
             this.jogador.idle();
         }
 
-
-        if (this.cursors.space.isDown || this.teclaZ.isDown){
+        if (this.teclaW.isDown){
             this.jogador.jump();
             attack_direction = 'T';
         }
-        else if(this.cursors.down.isDown  || this.teclaS.isDown){
+        else if(this.teclaS.isDown){
             this.jogador.crouch();
             attack_direction = 'D';
         }
-        
-        if (this.teclaX.isDown){
-            this.attack(attack_direction);
+        /////////JOGADOR 2
+
+        if (this.cursors.left.isDown){
+            this.jogador2.moveLeft();
+            attack_direction = 'L';
         }
+
+        else if (this.cursors.right.isDown){
+            this.jogador2.moveRight();
+            attack_direction = 'R';
+        }
+
+        else{
+            this.jogador2.idle();
+        }
+
+
+        if (this.cursors.up.isDown){
+            this.jogador2.jump();
+            attack_direction = 'T';
+        }
+        else if(this.cursors.down.isDown){
+            this.jogador2.crouch();
+            attack_direction = 'D';
+        }
+ 
+ 
     }
     
 }

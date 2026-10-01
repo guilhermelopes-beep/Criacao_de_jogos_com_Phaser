@@ -8,6 +8,8 @@
     box-sizing: border-box;
 }
 
+
+
 :root {
     --background: #080b12;
     --background-secondary: #0e121b;
@@ -23,8 +25,13 @@
     --border: rgba(255, 255, 255, 0.08);
 }
 
+@font-face {
+    font-family: 'Clarity City';
+    src: url('https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap');
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Clarity City', 'Helvetica', 'sans-serif';
 
     background:
         radial-gradient(
